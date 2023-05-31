@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "de.fishi.fishiapi"
+group = "de.fishi"
 version = "0.1-Beta"
 
 repositories {
