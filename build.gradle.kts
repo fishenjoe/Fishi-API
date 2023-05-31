@@ -1,9 +1,10 @@
 plugins {
-    id("java")
+    java
+    `maven-publish`
 }
 
 group = "de.fishi"
-version = "0.1-Beta"
+version = "v0.1-Beta"
 
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
