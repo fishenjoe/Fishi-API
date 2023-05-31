@@ -17,13 +17,6 @@ import java.util.UUID;
 public class Main extends JavaPlugin implements fishiAPI, Listener {
 
     private Map<UUID, FileConfiguration> playerConfigs;
-    private static Main plugin;
-
-    @Override
-    public void onLoad() {
-        plugin = this;
-    }
-
     @Override
     public void onEnable() {
         playerConfigs = new HashMap<>();
@@ -31,9 +24,9 @@ public class Main extends JavaPlugin implements fishiAPI, Listener {
     }
 
     @Override
-    public void loadPlayerConfig(Player player) {
+    public void loadPlayerConfig(Player player, String path) {
         UUID playerUUID = player.getUniqueId();
-        File dir = new File(getDataFolder().getPath() + "player-Saves");
+        File dir = new File(path);
 
         if(!dir.exists()){
             dir.mkdirs();
@@ -74,9 +67,6 @@ public class Main extends JavaPlugin implements fishiAPI, Listener {
         }
     }
 
-    public static Main getInstance() {
-        return plugin;
-    }
     @Override
     public FileConfiguration getPlayerConfigs(Player p){
         return playerConfigs.get(p.getUniqueId());
