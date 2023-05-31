@@ -1,4 +1,4 @@
 name: Fishi API
 version: '${version}'
-main: de.fishi.fishiapi.MyPlugin
+main: de.fishi.fishiapi.Main
 api-version: 1.19

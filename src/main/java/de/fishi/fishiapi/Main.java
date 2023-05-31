@@ -14,10 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class MyPlugin extends JavaPlugin implements fishiAPI, Listener {
+public class Main extends JavaPlugin implements fishiAPI, Listener {
 
     private Map<UUID, FileConfiguration> playerConfigs;
-    private static MyPlugin plugin;
+    private static Main plugin;
 
     @Override
     public void onLoad() {
@@ -74,7 +74,7 @@ public class MyPlugin extends JavaPlugin implements fishiAPI, Listener {
         }
     }
 
-    public static MyPlugin getInstance() {
+    public static Main getInstance() {
         return plugin;
     }
     @Override
