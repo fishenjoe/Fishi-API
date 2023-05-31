@@ -2,15 +2,10 @@ plugins {
     id 'java'
     id 'maven-publish'
 }
-
 group = 'de.fishi'
 version = 'v0.0.1-Beta'
-
-
-
 repositories {
     mavenCentral()
-
     maven {
         name = 'papermc-repo'
         url = 'https://repo.papermc.io/repository/maven-public/'
@@ -20,24 +15,30 @@ repositories {
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
 }
+
 dependencies {
     compileOnly 'io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT'
 }
 
-java{
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-}
+processResources {
+    filesMatching(['**/*.yml']) {
+        expand([version: version])
+    }
+    java {
+        toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    }
 
 
-tasks.compileJava {
-    options.encoding = 'UTF-8'
-    options.compilerArgs.add('-Xlint:unchecked')
-    options.compilerArgs.add('-Xlint:deprecation')
-}
+    tasks.compileJava {
+        options.encoding = 'UTF-8'
+        options.compilerArgs.add('-Xlint:unchecked')
+        options.compilerArgs.add('-Xlint:deprecation')
+    }
 
-tasks.compileJava.options.bootstrapClasspath = null
+    tasks.compileJava.options.bootstrapClasspath = null
 
-compileJava {
-    sourceCompatibility = '17'
-    targetCompatibility = '17'
+    compileJava {
+        sourceCompatibility = '17'
+        targetCompatibility = '17'
+    }
 }
