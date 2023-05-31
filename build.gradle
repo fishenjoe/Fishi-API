@@ -32,11 +32,6 @@ java {
     }
 }
 
-compileJava{
-    options.compilerArgs << '-Xlint:unchecked'
-    options.encoding = 'UTF-8'
-}
-
 processResources {
     filesMatching(['**/*.yml']){
         expand([version: version])
