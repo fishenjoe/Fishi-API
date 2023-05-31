@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 group = 'de.fishi'
-version = 'v0.0.1-Beta'
+version = 'v0.0.2-Beta'
 repositories {
     mavenCentral()
     maven {

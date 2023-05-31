@@ -1,10 +1,11 @@
 package de.fishi.fishiapi;
 
-import de.fishi.fishiapi.listener.PlayerJoinListener;
+import de.fishi.fishiapi.API.fishiAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginManager;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -13,10 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public final class Main extends JavaPlugin {
+public class MyPlugin extends JavaPlugin implements fishiAPI, Listener {
 
     private Map<UUID, FileConfiguration> playerConfigs;
-    private static Main plugin;
+    private static MyPlugin plugin;
 
     @Override
     public void onLoad() {
@@ -25,22 +26,11 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        addEventListener();
         playerConfigs = new HashMap<>();
+        Bukkit.getPluginManager().registerEvents(this, this);
     }
 
     @Override
-    public void onDisable() {
-        for (Player player : getServer().getOnlinePlayers()) {
-            savePlayerConfig(player);
-        }
-    }
-
-    public void addEventListener(){
-        PluginManager manager = getServer().getPluginManager();
-        manager.registerEvents(new PlayerJoinListener(), this);
-    }
-
     public void loadPlayerConfig(Player player) {
         UUID playerUUID = player.getUniqueId();
         File dir = new File(getDataFolder().getPath() + "player-Saves");
@@ -48,7 +38,6 @@ public final class Main extends JavaPlugin {
         if(!dir.exists()){
             dir.mkdirs();
         }
-
 
         File configFile = new File(dir, playerUUID + ".yml");
 
@@ -66,7 +55,8 @@ public final class Main extends JavaPlugin {
         playerConfigs.put(playerUUID, config);
     }
 
-    private void savePlayerConfig(Player player) {
+    @Override
+    public void savePlayerConfig(Player player) {
         UUID playeruuid = player.getUniqueId();
         File configFile = new File(getDataFolder(), playeruuid + ".yml");
 
@@ -84,10 +74,10 @@ public final class Main extends JavaPlugin {
         }
     }
 
-    public static Main getInstance() {
+    public static MyPlugin getInstance() {
         return plugin;
     }
-
+    @Override
     public FileConfiguration getPlayerConfigs(Player p){
         return playerConfigs.get(p.getUniqueId());
     }
