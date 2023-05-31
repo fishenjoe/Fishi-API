@@ -1,14 +1,16 @@
-import java.nio.charset.Charset
-
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group = 'de.fishi'
 version = 'v0.0.1-Beta'
 
+
+
 repositories {
     mavenCentral()
+
     maven {
         name = 'papermc-repo'
         url = 'https://repo.papermc.io/repository/maven-public/'
